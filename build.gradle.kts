@@ -7,12 +7,11 @@ plugins {
     kotlin("jvm") version "2.0.20"
     id("xyz.jpenilla.run-paper") version "2.3.1"
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-    id("io.papermc.paperweight.userdev") version "1.7.1"
     id("org.sayandev.stickynote.project")
 }
 
 group = "ir.taher7"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.1-SNAPSHOT"
 description = ""
 
 repositories {
@@ -22,13 +21,15 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
     //Jitpack (for Vault)
     maven("https://jitpack.io")
+    maven("https://repo.sayandev.org/releases")
+    maven("https://repo.sayandev.org/snapshots")
 }
 
 dependencies {
 //    implementation("com.h2database:h2:2.2.224")
 //    stickynote.implementation("org.mariadb.jdbc:mariadb-java-client:3.3.3")
 
-    paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
 
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("me.clip:placeholderapi:2.11.6")
@@ -53,18 +54,15 @@ tasks {
     runServer {
         minecraftVersion("1.21.1")
         downloadPlugins {
+            hangar("placeholderapi", "2.11.6")
             modrinth("viaversion", "5.0.3")
             modrinth("essentialsx", "2.20.1")
-            hangar("placeholderapi", "2.11.6")
-            url("https://download.luckperms.net/1556/bukkit/loader/LuckPerms-Bukkit-5.4.141.jar")
+            url("https://download.luckperms.net/1567/bukkit/loader/LuckPerms-Bukkit-5.4.150.jar")
             url("https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar")
 
         }
         jvmArgs("-Dnet.kyori.adventure.text.warnWhenLegacyFormattingDetected=false")
     }
-
-
-    paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 
     build {
         dependsOn(shadowJar)

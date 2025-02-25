@@ -22,37 +22,28 @@ class GameTools : JavaPlugin() {
         StickyNoteBukkitLoader(this)
 
         // Initialize PlaceholderAPI hook
-        if (hasPlugin("PlaceholderAPI")) {
-            PlaceholderAPIHook.injectComponent()
-        }
-
+        if (hasPlugin("PlaceholderAPI")) { PlaceholderAPIHook.injectComponent() }
 
         // Set instance
         instance = this
-
 
         // Load configs
         messageConfig
         storageConfig
         settingConfig
 
-
         // Connect to
         Database
         Socket
 
-
         // Register schedulers
         AutoAnnounce
-
 
         // Register commands
         CommandManager()
 
-
         // Register listeners
         registerListener(GameToolsListener())
-
 
         // Register tag resolver
         Utils.initTagResolvers()

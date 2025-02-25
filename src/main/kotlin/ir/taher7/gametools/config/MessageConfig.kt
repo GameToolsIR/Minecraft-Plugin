@@ -14,9 +14,6 @@ data class MessageConfig(
     val vote: Vote = Vote(),
     val boost: Boost = Boost(),
 ) : Config(pluginDirectory, FILE_NAME) {
-    init {
-        load()
-    }
 
 
     @ConfigSerializable
@@ -104,7 +101,7 @@ data class MessageConfig(
         private val messageConfigFile = File(pluginDirectory, FILE_NAME)
 
         fun defaultConfig(): MessageConfig {
-            return MessageConfig()
+            return MessageConfig().apply { save() }
         }
 
         fun fromConfig(): MessageConfig? {
@@ -116,6 +113,5 @@ data class MessageConfig(
         }
 
     }
-
 
 }
