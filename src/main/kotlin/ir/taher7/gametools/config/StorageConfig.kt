@@ -15,10 +15,6 @@ data class StorageConfig(
     val websocket: Websocket = Websocket()
 ) : Config(pluginDirectory, FILE_NAME) {
 
-    init {
-        load()
-    }
-
     enum class DatabaseMethod {
         SQLITE,
         MYSQL,
@@ -50,7 +46,7 @@ data class StorageConfig(
         private val databaseConfigFile = File(pluginDirectory, FILE_NAME)
 
         fun defaultConfig(): StorageConfig {
-            return StorageConfig()
+            return StorageConfig().apply { save() }
         }
 
         fun fromConfig(): StorageConfig? {

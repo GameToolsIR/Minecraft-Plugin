@@ -13,10 +13,6 @@ data class SettingConfig(
     val boost: Boost = Boost(),
 ) : Config(pluginDirectory, FILE_NAME) {
 
-    init {
-        load()
-    }
-
 
     @ConfigSerializable
     data class Vote(
@@ -80,7 +76,7 @@ data class SettingConfig(
         private val settingConfigFile = File(pluginDirectory, FILE_NAME)
 
         fun defaultConfig(): SettingConfig {
-            return SettingConfig()
+            return SettingConfig().apply { save() }
         }
 
         fun fromConfig(): SettingConfig? {
